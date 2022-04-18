@@ -10,6 +10,14 @@ h1 {
 }
 
 h2 {
+  margin: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 5px 0px;
+  text-align: center;
+}
+
+h3 {
   font-size: 1.2em;
   font-weight: bold;
   padding: 5px 0px;
@@ -60,10 +68,6 @@ img {
 
 img:nth-of-type(2n) {
   background-color: #FFFFFF;
-  display: block;
-  width: 100px;
-  padding: 10px;
-  margin: 10px auto;
   border-radius: 20px;
 }
 
@@ -77,14 +81,22 @@ img:hover {
 
 .intro {
   background-image: url("../images/librarybackground.jpeg");
-  min-height: 200px;
+  min-height: 250px;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .intro-text {
-  background-color: #FFFFFF;
-  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: absolute;
   top: 50%;
-  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #FFFFFF;
+  font-size: 24px;
 }
 
 .self-image {
@@ -104,7 +116,7 @@ img:hover {
 }
 
 .book {
-  flex-basis: 400px;
+  flex-basis: 300px;
   border: 5px solid #C2EABD;
   border-radius: 10px;
   padding: 0px 5px;
@@ -115,23 +127,31 @@ img:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 15px;
+  text-align: center;
 }
 
-.tip-intro,
-.tip2 {
-  grid-column: 1 / span 2;
+#reading {
+  display: none;
 }
 
-.tip1 {
-  grid-column: 2 / span 2;
+.tip-image1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .tip3,
-.tip4 {
+.tip4,
+.tip-intro,
+.tip2,
+.tip1,
+.tip-image1,
+#kindle {
   grid-column: 1 / span 3;
 }
 
 .tip5 {
+  grid-column: 2 / span 1;
   text-align: center;
 }
 
@@ -149,6 +169,63 @@ img:hover {
   font-size: 0.8em;
 }
 
+
+.flip-card {
+  background-color: transparent;
+  margin: auto;
+  width: 250px;
+  height: 350px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card:focus-within .flip-card-inner,
+.flip-card:active .flip-card-inner,
+.flip-card:focus .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.flip-card-front {
+  background-color: #C2EABD;
+}
+
+.flip-card-front > img {
+  width: 80%;
+  height: 80%;
+  padding: 10px;
+  margin: 10px auto;
+  border: 0px;
+}
+
+.flip-card-back {
+  background-color: #C2EABD;
+  color: #000000;
+  transform: rotateY(180deg);
+}
+
+.flip-card-back > p{
+  top: 5%;
+  padding: 10px;
+}
+
 @keyframes zoomin {
   from {
     transform:scale(0.1);
@@ -159,107 +236,194 @@ img:hover {
   }
 }
 
-@media (prefers-reduced-motion) {
-  .self_image {
-    animation-name: none;
+/* Tablet Size Media Query */
+@media (min-width: 768px) {
+  nav ul{
+    background-color: #FFB800;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+
+  nav li {
+    border: 0px;
+    padding: 0px;
+    text-align: center;
+    border-radius: 0px;
+  }
+
+  .active {
+    background-color: #FFFFFF;
+    text-transform: none;
+    font-style: italic;
+    padding: 3px 10px;
+    border: 0px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .book-container {
+    justify-content: space-evenly;
+    margin: 20px;
+  }
+  
+  .book {
+    border: 7px solid #C2EABD;
+    border-radius: 15px;
+    padding: 0px 7px;
+  }
+
+  .book > p {
+    padding: 5px;
+    max-height: 70px;
+    overflow: scroll;
+    margin: 5px;
+  }
+
+  .tips-container {
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 20px;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .tip-intro {
+    grid-column: 1 / span 3;
+  }
+
+  #reading {
+    display: inline;
+  }
+
+  #kindle {
+    grid-column: 1 / span 1;
+  }
+  
+  .tip1 {
+    grid-column: 2 / span 3;
+  }
+  
+  .tip2 {
+    grid-column: 1 / span 2;
+  }
+
+  .tip-image1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    grid-column: 3 / span 2;
+  }
+
+  .tip3,
+  .tip4{
+    grid-column: 1 / span 4;
+    text-align: center;
+  }
+  
+  .tip5,
+  #libby {
+    grid-column: 2 / span 2;
+    text-align: center;
   }
 }
 
-/* Special/Unique addition: CSS for flipping book*/
 
-.book-animation {
-  transform-style: preserve-3d;
-  position: relative;
-  left: 50%;
-  height: 50px;
-  cursor: pointer;
-  backface-visibility: visible;
-  padding: 10px;
+@media screen and (min-width: 1024px) {
+  nav ul{
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .book-container {
+    align-content: center;
+    margin: 20px;
+  }
+  
+  .book {
+    flex-basis: 400px;
+    border: 2px dashed #C2EABD;
+    border-radius: 15px;
+    padding: 0px 7px;
+  }
+
+  .book > p {
+    max-height: 100px;
+  }
+
+  .tips-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .tips-container > img,
+  .tips-container > div > img {
+    width: 400px;
+    background-color: #FFFFFF;
+    border: 0px solid #000000;
+    border-radius: 20px;
+  }
+  
+  .tip-intro, 
+  .tip2 {
+    grid-column: 1 / span 3;
+    margin-left: 10px;
+  }
+
+  #reading {
+    grid-column: 4 / span 2;
+  }
+
+  #kindle {
+    grid-column: 1 / span 2;
+  }
+  
+  .tip1,
+  .tip-image1 {
+    grid-column: 3 / span 3;
+  }
+  
+  .tip2 {
+    grid-column: 1 / span 2;
+  }
+
+  .tip-image1 {
+    grid-column: 3 / span 3;
+  }
+
+  .tip3,
+  .tip4{
+    grid-column: 1 / span 5;
+    text-align: center;
+  }
+  
+  .tip5,
+  #libby {
+    grid-column: 2 / span 3;
+    text-align: center;
+  }
+
+  #listening,
+  #listening2,
+  #libby {
+    width: 300px;
+  }
+
 }
 
-.front, .back, .page1, .page2, .page3, .page4, .page5, .page6 {
-  transform-style: preserve-3d;
-  position: absolute;
-  width: 45px;
-  height: 100%;
-  top: 0; left: 0;
-  transform-origin: left center;
-  transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
-}
+@media (prefers-reduced-motion) {
+  .self-image {
+    animation: none;
+  }
 
-.front, .back {
-  background: #C2EABD;
-}
+  .flip-card:hover .flip-card-inner,
+  .flip-card:focus-within .flip-card-inner,
+  .flip-card:active .flip-card-inner,
+  .flip-card:focus .flip-card-inner {
+    transform: none;
+  }
 
-.front, .page1, .page3, .page5 {
-  border-bottom-right-radius: .5em;
-  border-top-right-radius: .5em;
-}
-
-.back, .page2, .page4, .page6 {
-  border-bottom-right-radius: .5em;
-  border-top-right-radius: .5em;
-}
-
-.page1 { 
-  background: #efefef;
-}
-
-.page2 {
-  background: #efefef;
-}
-
-.page3 {
-  background: #f5f5f5;
-}
-
-.page4 {
-  background: #f5f5f5;
-}
-
-.page5 {
-  background: #fafafa;
-}
-
-.page6 {
-  background: #fdfdfd;
-}
-
-.book-animation:hover .front {
-  transform: rotateY(-160deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .page1 {
-  transform: rotateY(-150deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .page2 {
-  transform: rotateY(-30deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .page3 {
-  transform: rotateY(-140deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .page4 {
-  transform: rotateY(-40deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .page5 {
-  transform: rotateY(-130deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .page6 {
-  transform: rotateY(-50deg) scale(1.1);
-  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
-}
-
-.book-animation:hover .back {
-  transform: rotateY(-20deg) scale(1.1);
+  .intro {
+    background-attachment: inherit;
+  }
 }
